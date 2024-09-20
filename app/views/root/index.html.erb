@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amagi - Cloud-Managed Broadcast Services</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <%= render "header" %>
+    <header>
+        <div class="container">
+            <h1>Amagi Corporation</h1>
+        </div>
+    </header>
+    <main>
+        <section class="hero">
+            <div class="container">
+                <h2>Revolutionizing Broadcast with Cloud Technology</h2>
+                <p>Amagi offers cloud-managed broadcast services and targeted advertising solutions to media companies
+                    worldwide.</p>
+            </div>
+        </section>
+        <section class="services">
+            <div class="container">
+                <h2>Our Services</h2>
+                <div class="service">
+                    <h3>Broadcast Solutions</h3>
+                    <p>Cloud-based broadcasting services that ensure high quality and reliability.</p>
+                </div>
+                <div class="service">
+                    <h3>Advertising Solutions</h3>
+                    <p>Targeted advertising solutions to maximize revenue and engagement.</p>
+                </div>
+                <div class="service">
+                    <h3>Content Distribution</h3>
+                    <p>Efficient and scalable content distribution to multiple platforms.</p>
+                </div>
+            </div>
+        </section>
+    </main>
+    <hr>
+    <div class="container">
+        <h2>Todo List Application</h2>
+    </div>
+    <form method="POST" action="/add">
+        <%= token_tag %>
+            <div class="col-6" style="margin: 0 auto;">
+                <div class="mb-3">
+                    <label for="titleid" class="form-label">Title of Todo</label>
+                    <input name="title" type="text" class="form-control" id="titleid" placeholder="Title">
+                </div>
+                <div class="mb-3">
+                    <label for="descriptionid" class="form-label">Description of Todo</label>
+                    <textarea name="description" placeholder="Description" class="form-control" id="descriptionid"
+                        rows="3"></textarea>
+                </div>
+                <div class="mb-3">
+                    <input type="submit" style="display: block; margin: 0 auto;" class="btn btn-primary" value="Add">
+                </div>
+            </div>
+    </form>
+    <hr>
+    <div class="container col-3">
+    <form class="d-flex" role="search" method="GET" action="/search">
+        <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="query">
+        <button class="btn btn-outline-success" type="submit">Search</button>
+    </form>
+    <hr>
+    
+    <% @posts.each do |post| %>
+        <div class="card" style="width: 18rem; margin: 0 auto;">
+            <%# <img src="..." class="card-img-top" alt="..."> %>
+            <div class="card-body">
+                <h5 class="card-title">
+                    <%= post.title %>
+                </h5>
+                <p class="card-text">
+                    <%= post.description %>
+                </p>
+                <form action="/delete/<%= post.id %>" method="post" style="display: inline;">
+                <%= token_tag %>
+                    <input type="hidden" name="_method" value="delete">
+                    <input type="submit" style="margin: 0 auto;" value="Delete" class="btn btn-danger">
+                </form>
+            </div>
+        </div>
+        <hr>
+    <% end %>
+    </div>
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 Amagi. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
